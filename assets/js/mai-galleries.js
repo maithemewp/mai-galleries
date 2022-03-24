@@ -12,10 +12,6 @@
 
 ( function() {
 	const prvs = new Parvus({
-		captions: true,
-		// captionsSelector: '.mai-gallery-image-caption',
-		// captionsSelector: 'self',
-		// captionsSelector: 'figcaption',
 		lightboxIndicatorIcon: '',
 	});
 } )();
