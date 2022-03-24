@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit94b7dd50ad8941a61603eab127587465
+class ComposerStaticInit31ed52856d7da0dec3b120a68f359710
 {
     public static $files = array (
         '49a1299791c25c6fd83542c6fedacddd' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v4p11.php',
@@ -17,7 +17,7 @@ class ComposerStaticInit94b7dd50ad8941a61603eab127587465
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit94b7dd50ad8941a61603eab127587465::$classMap;
+            $loader->classMap = ComposerStaticInit31ed52856d7da0dec3b120a68f359710::$classMap;
 
         }, null, ClassLoader::class);
     }

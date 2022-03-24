@@ -220,7 +220,7 @@ final class Mai_Galleries_Plugin {
 	 * @return void
 	 */
 	public function admin_notice() {
-		printf( '<div class="notice notice-warning"><p>%s%s%s</p></div>', __( 'Mai Galleries requires Mai Engine plugin version 2.21.0 or later. Please install/upgrade now to use the Mai Gallery block.', 'mai-galleries' ) );
+		printf( '<div class="notice notice-warning"><p>%s</p></div>', __( 'Mai Galleries requires Mai Engine plugin version 2.21.0 or later. Please install/upgrade now to use the Mai Gallery block.', 'mai-galleries' ) );
 	}
 }
 
