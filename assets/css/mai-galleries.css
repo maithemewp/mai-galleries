@@ -77,6 +77,13 @@
 	display: none;
 }
 
+/* @media screen and (prefers-reduced-motion: no-preference) {
+
+	.parvus__slider--animate:not(.parvus__slider--is-dragging) {
+		transition: transform var(--parvus-transition-duration) var(--parvus-transition-timing-function);
+	}
+} */
+
 .parvus__slider--is-draggable {
 	cursor: -webkit-grab;
 	cursor: grab;
@@ -109,13 +116,6 @@
 	color: var(--parvus-overlay-text);
 	text-align: center;
 	will-change: transform, opacity;
-}
-
-@media screen and (prefers-reduced-motion: no-preference) {
-
-	.parvus__slide .parvus__caption {
-		transition: transform var(--parvus-transition-duration) var(--parvus-transition-timing-function), opacity var(--parvus-transition-duration) var(--parvus-transition-timing-function);
-	}
 }
 
 .parvus__slide img {
@@ -234,14 +234,24 @@
 @media screen and (prefers-reduced-motion: no-preference) {
 
 	.parvus__counter,
-	.parvus__btn {
+	.parvus__btn,
+	.parvus__slide .parvus__caption {
 		transition: transform var(--parvus-transition-duration) var(--parvus-transition-timing-function), opacity var(--parvus-transition-duration) var(--parvus-transition-timing-function);
+	}
+
+	.parvus__slider--animate:not(.parvus__slider--is-dragging) {
+		transition: transform var(--parvus-transition-duration) var(--parvus-transition-timing-function);
+	}
+
+	.parvus__slide {
+		transition: visibility var(--parvus-transition-duration) var(--parvus-transition-timing-function);
 	}
 
 	.parvus--is-opening .parvus__counter,
 	.parvus--is-opening .parvus__btn--close,
 	.parvus--is-opening .parvus__btn--previous,
 	.parvus--is-opening .parvus__btn--next,
+	.parvus--is-opening .parvus__slide,
 	.parvus--is-opening .parvus__caption,
 	.parvus--is-closing .parvus__counter,
 	.parvus--is-closing .parvus__btn--close,
@@ -270,11 +280,6 @@
 	.parvus--is-vertical-closing .parvus__caption {
 		transform: translateY(100%);
 		opacity: 0;
-	}
-
-	.parvus__slider--animate:not(.parvus__slider--is-dragging),
-	.parvus__slide {
-		transition: visibility var(--parvus-transition-duration) var(--parvus-transition-timing-function);
 	}
 }
 
