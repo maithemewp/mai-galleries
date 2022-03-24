@@ -12,7 +12,10 @@
 
 ( function() {
 	const prvs = new Parvus({
-		captionsSelector: '.mai-gallery-image-caption',
+		captions: true,
+		// captionsSelector: '.mai-gallery-image-caption',
+		// captionsSelector: 'self',
+		// captionsSelector: 'figcaption',
 		lightboxIndicatorIcon: '',
 	});
 } )();

@@ -173,12 +173,19 @@ class Mai_Gallery {
 					continue;
 				}
 
-				if ( $this->args['lightbox'] ) {
-					$image_url = wp_get_attachment_image_url( $image_id, 'large' );
-					$image     = sprintf( '<a class="mai-gallery-image-link lightbox" href="%s" data-group="mai-gallery-%s">%s</a>', $image_url, $count, $image );
-				}
-
 				$caption = wp_get_attachment_caption( $image_id );
+
+				if ( $this->args['lightbox'] ) {
+					$href   = wp_get_attachment_image_url( $image_id, 'medium' );
+					$srcset = wp_get_attachment_image_srcset( $image_id, 'cover' );
+					$image  = sprintf( '<a class="mai-gallery-image-link lightbox" href="%s" data-srcset="%s" data-group="mai-gallery-%s" data-caption="%s">%s</a>',
+						esc_url( $href ),
+						esc_attr( $srcset ),
+						$count,
+						esc_attr( $caption ),
+						$image
+					);
+				}
 
 				if ( $caption ) {
 					$image .= sprintf( '<figcaption class="mai-gallery-image-caption">%s</figcaption>', $caption );
@@ -267,6 +274,9 @@ class Mai_Gallery {
 			margin: var(--gallery-item-margin, 0);
 			line-height: 1;
 			text-align: center;
+		}
+		.mai-gallery-image-caption {
+			margin-top: var(--spacing-xxs);
 		}
 		<?php if ( $this->args['preview'] ) { ?>
 		.mai-gallery a {
