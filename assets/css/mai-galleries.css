@@ -489,7 +489,8 @@ iframe.wait-autoplay {
 .glightbox-clean .gprev,
 .glightbox-clean .gnext {
 	position: absolute;
-	top: calc(50% - (var(--spacing-xxl) / 2));
+	top: unset;
+	bottom: var(--spacing-lg);
 }
 
 .glightbox-clean .gprev {
@@ -796,9 +797,10 @@ iframe.wait-autoplay {
 @media (min-width: 769px) {
 
 	.glightbox-container .ginner-container {
+		flex-direction: row;
 		width: auto;
 		height: auto;
-		flex-direction: row;
+		padding: var(--spacing-sm) var(--spacing-xxxl);
 	}
 
 	.glightbox-container .ginner-container.desc-top .gslide-description {
@@ -862,6 +864,12 @@ iframe.wait-autoplay {
 		position: absolute;
 		height: 100%;
 		overflow-y: auto;
+	}
+
+	.glightbox-clean .gprev,
+	.glightbox-clean .gnext {
+		top: calc(50% - (var(--spacing-xxl) / 2));
+		bottom: unset;
 	}
 
 	.glightbox-clean .gprev,
