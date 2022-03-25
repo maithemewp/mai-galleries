@@ -196,7 +196,7 @@
 }
 
 .gslide-inline {
-	background: #fff;
+	background: var(--color-white);
 	text-align: left;
 	max-height: calc(100vh - 40px);
 	overflow: auto;
@@ -225,7 +225,7 @@
 	display: flex;
 	width: 100%;
 	min-width: 100%;
-	background: #fff;
+	background: var(--color-white);
 	padding: 0;
 	overflow: auto;
 	max-height: 75vh;
@@ -305,7 +305,7 @@
 }
 
 .glightbox-mobile .glightbox-container .gslide-title {
-	color: #fff;
+	color: var(--color-white);
 	font-size: 1em;
 }
 
@@ -314,7 +314,7 @@
 }
 
 .glightbox-mobile .glightbox-container .gslide-desc a {
-	color: #fff;
+	color: var(--color-white);
 	font-weight: bold;
 }
 
@@ -323,7 +323,7 @@
 }
 
 .glightbox-mobile .glightbox-container .gslide-desc .desc-more {
-	color: #fff;
+	color: var(--color-white);
 	opacity: 0.4;
 }
 
@@ -366,7 +366,7 @@
 	width: 25px;
 	-webkit-animation: lightboxLoader 0.8s infinite linear;
 	animation: lightboxLoader 0.8s infinite linear;
-	border: 2px solid #fff;
+	border: 2px solid var(--color-white);
 	border-right-color: transparent;
 	border-radius: 50%;
 	position: absolute;
@@ -396,15 +396,17 @@
 .gnext,
 .gclose {
 	z-index: 99999;
-	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: var(--spacing-xxl);
 	height: var(--spacing-xxl);
 	padding: 0;
 	border: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	cursor: pointer;
+	-webkit-animation: gfadeIn 1.5s ease;
+	animation: gfadeIn 1.5s ease;
 }
 
 .gprev svg,
@@ -426,7 +428,7 @@
 .gprev .garrow,
 .gnext .garrow,
 .gclose .garrow {
-	stroke: #fff;
+	stroke: var(--color-white);
 }
 
 .gbtn.focused {
@@ -446,11 +448,9 @@ iframe.wait-autoplay {
 /*Skin */
 
 .glightbox-clean .gslide-description {
-	background: #fff;
-}
-
-.glightbox-clean .gdesc-inner {
-	padding: 22px 20px;
+	padding: var(--spacing-md) 0;
+	color: var(--color-white);
+	text-align: center;
 }
 
 .glightbox-clean .gslide-title {
@@ -483,7 +483,7 @@ iframe.wait-autoplay {
 .glightbox-clean .gprev path,
 .glightbox-clean .gnext path,
 .glightbox-clean .gclose path {
-	fill: #fff;
+	fill: var(--color-white);
 }
 
 .glightbox-clean .gprev,

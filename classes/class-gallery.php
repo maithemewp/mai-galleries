@@ -176,10 +176,14 @@ class Mai_Gallery {
 				$caption = wp_get_attachment_caption( $image_id );
 
 				if ( $this->args['lightbox'] ) {
-					$href  = wp_get_attachment_image_url( $image_id, 'large' );
-					$image = sprintf( '<a class="mai-gallery-image-link mai-gallery-lightbox" href="%s" data-gallery="mai-gallery-%s" data-glightbox="%s">%s</a>',
+					$href   = wp_get_attachment_image_url( $image_id, 'medium' );
+					$sizes  = wp_get_attachment_image_sizes( $image_id, 'cover' );
+					$srcset = wp_get_attachment_image_srcset( $image_id, 'cover' );
+					$image  = sprintf( '<a class="mai-gallery-image-link mai-gallery-lightbox" href="%s" data-gallery="mai-gallery-%s" data-sizes="%s" data-srcset="%s" data-glightbox="description:%s">%s</a>',
 						esc_url( $href ),
 						$count,
+						esc_attr( $sizes ),
+						esc_attr( $srcset ),
 						esc_attr( $caption ),
 						$image
 					);
