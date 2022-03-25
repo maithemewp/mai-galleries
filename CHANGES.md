@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.0
+Changed: Switched from Parvus to gLightbox.
+
 ## 0.2.0
 Changed: Added border on arrows and close button on hover/focus/active.
 Fixed: Allow captions to work.
