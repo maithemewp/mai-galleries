@@ -142,7 +142,7 @@ class Mai_Gallery {
 		}
 
 		if ( $this->args['shadow'] ) {
-			$atts['class'] = mai_add_classes( 'has-drop-shadow', $atts['class'] );
+			$atts['style'] .= '--image-filter:var(--drop-shadow);';
 		}
 
 		$html .= genesis_markup(
@@ -176,11 +176,9 @@ class Mai_Gallery {
 				$caption = wp_get_attachment_caption( $image_id );
 
 				if ( $this->args['lightbox'] ) {
-					$href   = wp_get_attachment_image_url( $image_id, 'medium' );
-					$srcset = wp_get_attachment_image_srcset( $image_id, 'cover' );
-					$image  = sprintf( '<a class="mai-gallery-image-link lightbox" href="%s" data-srcset="%s" data-group="mai-gallery-%s" data-caption="%s">%s</a>',
+					$href  = wp_get_attachment_image_url( $image_id, 'large' );
+					$image = sprintf( '<a class="mai-gallery-image-link mai-gallery-lightbox" href="%s" data-gallery="mai-gallery-%s" data-glightbox="%s">%s</a>',
 						esc_url( $href ),
-						esc_attr( $srcset ),
 						$count,
 						esc_attr( $caption ),
 						$image
@@ -264,6 +262,7 @@ class Mai_Gallery {
 		?>
 		<style>
 		.mai-gallery {
+			--link-filter-hover: brightness(0.8);
 			line-height: 1.5;
 		}
 		.mai-gallery-item {
@@ -277,6 +276,17 @@ class Mai_Gallery {
 		}
 		.mai-gallery-image-caption {
 			margin-top: var(--spacing-xxs);
+		}
+		.mai-gallery-image-link {
+			overflow: hidden;
+		}
+		.mai-gallery-image-link:hover .mai-gallery-image,
+		.mai-gallery-image-link:focus  .mai-gallery-image {
+			transform: scale(1.05);
+		}
+		.mai-gallery-image {
+			width: 100%;
+			transition: var(--transition);
 		}
 		<?php if ( $this->args['preview'] ) { ?>
 		.mai-gallery a {
