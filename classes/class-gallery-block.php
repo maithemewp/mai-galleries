@@ -14,6 +14,37 @@ class Mai_Gallery_Block {
 	function __construct() {
 		add_action( 'acf/init', [ $this, 'register_block' ], 10, 3 );
 		add_action( 'acf/init', [ $this, 'register_field_group' ], 10, 3 );
+		add_filter( 'acf/load_field/key=mai_gallery_columns_clone', [ $this, 'load_columns' ] );
+	}
+
+	/**
+	 * Loads auto/fit option for columns.
+	 *
+	 * @since TBD
+	 *
+	 * @param array $field The ACF field.
+	 *
+	 * @return array
+	 */
+	function load_columns( $field ) {
+		if ( ! ( isset( $field['sub_fields'] ) && $field['sub_fields'] ) ) {
+			return $fields;
+		}
+
+		foreach ( $field['sub_fields'] as $index => $sub_field ) {
+			if ( ! isset( $sub_field['key'] ) ) {
+				continue;
+			}
+
+			if ( ! in_array( $sub_field['key'], [ 'mai_columns', 'mai_columns_md', 'mai_columns_sm', 'mai_columns_xs' ] ) ) {
+				continue;
+			}
+
+			$field['sub_fields'][ $index ]['choices']['auto'] = esc_html__( 'Fit', 'mai-gallery' );
+			$field['sub_fields'][ $index ]['choices']         = array_unique( $field['sub_fields'][ $index ]['choices'] );
+		}
+
+		return $field;
 	}
 
 	/**
@@ -32,7 +63,7 @@ class Mai_Gallery_Block {
 			[
 				'name'            => 'mai-gallery',
 				'title'           => __( 'Mai Gallery', 'mai-galleries' ),
-				'description'     => __( 'A custom gallery block.', 'mai-galleries' ),
+				'description'     => __( 'A responsive image gallery with optional image lightbox.', 'mai-galleries' ),
 				'render_callback' => [ $this, 'do_gallery' ],
 				'category'        => 'widgets',
 				'keywords'        => [ 'gallery' ],
@@ -41,10 +72,6 @@ class Mai_Gallery_Block {
 				'supports'        => [
 					'align' => [ 'wide', 'full' ],
 				],
-				'enqueue_assets'  => function() {
-					// mai_enqueue_gallery_scripts();
-					// mai_enqueue_gallery_styles();
-				},
 			]
 		);
 	}
@@ -157,7 +184,7 @@ class Mai_Gallery_Block {
 						'name'         => 'lightbox',
 						'instructions' => esc_html__( 'Loads a larger image in an overlay when clicking on a thumbnail.', 'mai-galleries' ),
 						'label'        => '',
-						'message'      => esc_html__( 'Add image lightbox', 'mai-galleries' ),
+						'message'      => esc_html__( 'Enable image lightbox', 'mai-galleries' ),
 						'type'         => 'true_false',
 					],
 					[

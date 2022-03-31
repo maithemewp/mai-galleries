@@ -1,2 +1,2 @@
-# Mai Lists
-Custom lists with icons, numbers, colors, and spacing.
+# Mai Galleries
+A responsive image gallery block with optional image lightbox.

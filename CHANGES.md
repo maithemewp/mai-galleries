@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+* Added: New "Fit" column size to fit the column to the size of the content inside.
+* Changed: Updated block description and tweaked field labels.
+
 ## 0.3.1
 * Changed: Fade in gallery arrows/icons.
 

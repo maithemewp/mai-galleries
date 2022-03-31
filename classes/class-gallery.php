@@ -65,11 +65,11 @@ class Mai_Gallery {
 			'image_size'             => esc_html( $args['image_size'] ),
 			'shadow'                 => mai_sanitize_bool( $args['shadow'] ),
 			'lightbox'               => mai_sanitize_bool( $args['lightbox'] ),
-			'columns'                => absint( $args['columns'] ),
+			'columns'                => is_numeric( $args['columns'] ) ? absint( $args['columns'] ) : esc_html( $args['columns'] ),
 			'columns_responsive'     => mai_sanitize_bool( $args['columns_responsive'] ),
-			'columns_md'             => absint( $args['columns_md'] ),
-			'columns_sm'             => absint( $args['columns_sm'] ),
-			'columns_xs'             => absint( $args['columns_xs'] ),
+			'columns_md'             => is_numeric( $args['columns_md'] ) ? absint( $args['columns_md'] ) : esc_html( $args['columns_md'] ),
+			'columns_sm'             => is_numeric( $args['columns_sm'] ) ? absint( $args['columns_sm'] ) : esc_html( $args['columns_sm'] ),
+			'columns_xs'             => is_numeric( $args['columns_xs'] ) ? absint( $args['columns_xs'] ) : esc_html( $args['columns_xs'] ),
 			'align_columns'          => esc_html( $args['align_columns'] ),
 			'align_columns_vertical' => esc_html( $args['align_columns_vertical'] ),
 			'column_gap'             => esc_html( $args['column_gap'] ),
@@ -289,7 +289,7 @@ class Mai_Gallery {
 			transform: scale(1.05);
 		}
 		.mai-gallery-image {
-			width: 100%;
+			margin: auto;
 			transition: var(--transition);
 		}
 		<?php if ( $this->args['preview'] ) { ?>
