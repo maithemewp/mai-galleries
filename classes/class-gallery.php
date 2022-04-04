@@ -56,19 +56,17 @@ class Mai_Gallery {
 		);
 
 		// Sanitize.
-		$args = [
-			'preview'                => mai_sanitize_bool( $args['preview'] ),
-			'align'                  => esc_attr( $args['align'] ),
-			'class'                  => esc_html( $args['class'] ),
-			'images'                 => $args['images'] ? array_map( 'absint', (array) $args['images'] ) : [],
-			'image_orientation'      => esc_html( $args['image_orientation'] ),
-			'image_size'             => esc_html( $args['image_size'] ),
-			'shadow'                 => mai_sanitize_bool( $args['shadow'] ),
-			'lightbox'               => mai_sanitize_bool( $args['lightbox'] ),
-		];
+		$args['preview']           = mai_sanitize_bool( $args['preview'] );
+		$args['align']             = esc_attr( $args['align'] );
+		$args['class']             = esc_html( $args['class'] );
+		$args['images']            = $args['images'] ? array_map( 'absint', (array) $args['images'] ) : [];
+		$args['image_orientation'] = esc_html( $args['image_orientation'] );
+		$args['image_size']        = esc_html( $args['image_size'] );
+		$args['shadow']            = mai_sanitize_bool( $args['shadow'] );
+		$args['lightbox']          = mai_sanitize_bool( $args['lightbox'] );
 
 		// Layout.
-		$args                       = mai_get_columns_sanitized( $args );
+		$args                      = array_merge( $args, mai_get_columns_sanitized( $args ) );
 
 		$this->args       = $args;
 		$this->image_size = $this->get_image_size();
