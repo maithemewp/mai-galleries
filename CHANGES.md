@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.4
+* Changed: Uses engine columns sanitization helper function.
+
 ## 0.3.3
 * Added: New "Fit" column size to fit the column to the size of the content inside.
 * Changed: Updated block description and tweaked field labels.
