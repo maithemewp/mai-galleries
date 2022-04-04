@@ -65,18 +65,10 @@ class Mai_Gallery {
 			'image_size'             => esc_html( $args['image_size'] ),
 			'shadow'                 => mai_sanitize_bool( $args['shadow'] ),
 			'lightbox'               => mai_sanitize_bool( $args['lightbox'] ),
-			'columns'                => is_numeric( $args['columns'] ) ? absint( $args['columns'] ) : esc_html( $args['columns'] ),
-			'columns_responsive'     => mai_sanitize_bool( $args['columns_responsive'] ),
-			'columns_md'             => is_numeric( $args['columns_md'] ) ? absint( $args['columns_md'] ) : esc_html( $args['columns_md'] ),
-			'columns_sm'             => is_numeric( $args['columns_sm'] ) ? absint( $args['columns_sm'] ) : esc_html( $args['columns_sm'] ),
-			'columns_xs'             => is_numeric( $args['columns_xs'] ) ? absint( $args['columns_xs'] ) : esc_html( $args['columns_xs'] ),
-			'align_columns'          => esc_html( $args['align_columns'] ),
-			'align_columns_vertical' => esc_html( $args['align_columns_vertical'] ),
-			'column_gap'             => esc_html( $args['column_gap'] ),
-			'row_gap'                => esc_html( $args['row_gap'] ),
-			'margin_top'             => sanitize_html_class( $args['margin_top'] ),
-			'margin_bottom'          => sanitize_html_class( $args['margin_bottom'] ),
 		];
+
+		// Layout.
+		$args                       = mai_get_columns_sanitized( $args );
 
 		$this->args       = $args;
 		$this->image_size = $this->get_image_size();
