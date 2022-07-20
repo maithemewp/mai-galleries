@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0 (7/20/22)
+* Fixed: Missing alt and title attributes on images.
+* Version bump for consistency and to show the plugin has official been released.
+
 ## 0.3.4
 * Changed: Uses engine columns sanitization helper function.
 
