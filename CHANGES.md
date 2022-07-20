@@ -2,6 +2,7 @@
 
 ## 1.0.0 (7/20/22)
 * Fixed: Missing alt and title attributes on images.
+* Fixed: Undefined function error in certain scenarios when Mai Engine is not active.
 * Version bump for consistency and to show the plugin has official been released.
 
 ## 0.3.4
