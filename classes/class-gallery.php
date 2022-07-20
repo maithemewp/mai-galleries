@@ -155,7 +155,9 @@ class Mai_Gallery {
 					$this->image_size,
 					false,
 					[
+						'alt'   => get_post_meta( $image_id, '_wp_attachment_image_alt', true ),
 						'class' => "mai-gallery-image size-{$this->image_size}",
+						'title' => get_the_title( $image_id ),
 					]
 				);
 
