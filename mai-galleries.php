@@ -204,7 +204,7 @@ final class Mai_Galleries_Plugin {
 			return;
 		}
 
-		if ( ! version_compare( mai_get_version(), '2.21', '>' ) ) {
+		if ( function_exists( 'mai_get_version' ) && ! version_compare( mai_get_version(), '2.21', '>' ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice' ] );
 			return;
 		}
