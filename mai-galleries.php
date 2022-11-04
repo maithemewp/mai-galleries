@@ -146,7 +146,7 @@ final class Mai_Galleries_Plugin {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'admin_init',        [ $this, 'updater' ] );
+		add_action( 'plugins_loaded',    [ $this, 'updater' ] );
 		add_action( 'after_setup_theme', [ $this, 'run' ] ); // Plugins loaded is too early to check for engine version.
 	}
 
@@ -204,12 +204,13 @@ final class Mai_Galleries_Plugin {
 			return;
 		}
 
-		if ( function_exists( 'mai_get_version' ) && ! version_compare( mai_get_version(), '2.21', '>' ) ) {
+		if ( ! function_exists( 'mai_get_version' ) || ( function_exists( 'mai_get_version' ) && ! version_compare( mai_get_version(), '2.21', '>' ) ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice' ] );
 			return;
 		}
 
-		new Mai_Gallery_Block;
+		// Blocks.
+		include MAI_GALLERIES_PLUGIN_DIR . 'blocks/mai-gallery/block.php';
 	}
 
 	/**

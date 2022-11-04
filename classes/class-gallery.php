@@ -103,9 +103,9 @@ class Mai_Gallery {
 			return $html;
 		}
 
-		if ( $this->args['lightbox'] ) {
-			mai_enqueue_gallery_scripts();
-			mai_enqueue_gallery_styles();
+		if ( ! $this->args['preview'] && $this->args['lightbox'] ) {
+			$this->enqueue_lightbox_styles();
+			$this->enqueue_lightbox_scripts();
 		}
 
 		$atts = [
@@ -241,6 +241,39 @@ class Mai_Gallery {
 	}
 
 	/**
+	 * Enqueues gallery scripts.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	function enqueue_lightbox_scripts() {
+		wp_enqueue_script(
+			'mai-galleries',
+			MAI_GALLERIES_PLUGIN_URL . sprintf( 'assets/js/mai-galleries-lightbox%s.js', $this->get_suffix() ),
+			[],
+			MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/js/mai-galleries-lightbox%s.js', $this->get_suffix() ) ) ),
+			true
+		);
+	}
+
+	/**
+	 * Enqueues gallery styles.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	function enqueue_lightbox_styles() {
+		wp_enqueue_style(
+			'mai-galleries',
+			MAI_GALLERIES_PLUGIN_URL . sprintf( 'assets/css/mai-galleries-lightbox%s.css', $this->get_suffix() ),
+			[],
+			MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries-lightbox%s.css', $this->get_suffix() ) ) )
+		);
+	}
+
+	/**
 	 * Gets toc css link if it hasn't been loaded yet.
 	 *
 	 * @since 0.1.0
@@ -248,52 +281,40 @@ class Mai_Gallery {
 	 * @return string
 	 */
 	public function get_css() {
-		static $loaded = false;
+		static $first = false;
 
-		if ( $loaded ) {
+		if ( $first ) {
 			return;
 		}
 
-		ob_start();
-		?>
-		<style>
-		.mai-gallery {
-			--link-filter-hover: brightness(0.8);
-			line-height: 1.5;
-		}
-		.mai-gallery-item {
-			display: flex;
-			flex-direction: column;
-			align-content: center;
-			justify-content: center;
-			margin: var(--gallery-item-margin, 0);
-			line-height: 1;
-			text-align: center;
-		}
-		.mai-gallery-image-caption {
-			margin-top: var(--spacing-xxs);
-		}
-		.mai-gallery-image-link {
-			overflow: hidden;
-		}
-		.mai-gallery-image-link:hover .mai-gallery-image,
-		.mai-gallery-image-link:focus  .mai-gallery-image {
-			transform: scale(1.05);
-		}
-		.mai-gallery-image {
-			margin: auto;
-			transition: var(--transition);
-		}
-		<?php if ( $this->args['preview'] ) { ?>
-		.mai-gallery a {
-			pointer-events: none;
-		}
-		<?php } ?>
-		</style>
-		<?php
-		$css    = ob_get_clean();
-		$loaded = true;
+		$css = file_get_contents( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries%s.css', $this->get_suffix() ) );
 
-		return $css;
+		if ( $this->args['preview'] ) {
+			$css .= '.mai-gallery a {pointer-events: none;}';
+		}
+
+		$first = true;
+
+		return sprintf( '<style>%s</style>', $css );
+	}
+
+	/**
+	 * Gets the script/style `.min` suffix for minified files.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return string
+	 */
+	function get_suffix() {
+		static $suffix = null;
+
+		if ( ! is_null( $suffix ) ) {
+			return $suffix;
+		}
+
+		$debug  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
+		$suffix = $debug ? '' : '.min';
+
+		return $suffix;
 	}
 }

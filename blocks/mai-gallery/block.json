@@ -1,0 +1,17 @@
+{
+  "name": "acf/mai-gallery",
+  "title": "Mai Gallery",
+  "description": "A responsive image gallery with optional image lightbox.",
+  "category": "widgets",
+  "keywords": [ "gallery", "slideshow" ],
+  "icon": "format-gallery",
+  "textdomain": "mai-gallery",
+  "editorStyle": "file:../../assets/css/mai-galleries.min.css",
+  "acf": {
+    "mode": "preview",
+    "renderCallback": "mai_do_gallery_block"
+  },
+  "supports": {
+    "align": [ "wide", "full" ]
+  }
+}
