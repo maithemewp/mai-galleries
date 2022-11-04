@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 (11/4/22)
+* Changed: Mai Gallery block now uses v2 block API.
+* Changed: Updated the updater.
+* Fixed: Border radius not being respected on images.
+
 ## 1.0.0 (7/20/22)
 * Fixed: Missing alt and title attributes on images.
 * Fixed: Undefined function error in certain scenarios when Mai Engine is not active.
