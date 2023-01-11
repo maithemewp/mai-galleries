@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1 (1/11/23)
+* Fixed: Better support for SVG logos.
+
 ## 1.1.0 (11/4/22)
 * Changed: Mai Gallery block now uses v2 block API.
 * Changed: Updated the updater.
