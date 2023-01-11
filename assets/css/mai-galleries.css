@@ -28,6 +28,7 @@
 }
 
 .mai-gallery-image {
+	width: auto;
 	margin: auto;
 	transition: var(--transition);
 }
