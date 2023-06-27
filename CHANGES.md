@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (TBD)
+* Added: New block setting to enable linked images in your gallery.
+* Changed: Updated the updater.
+
 ## 1.1.1 (1/11/23)
 * Fixed: Better support for SVG logos.
 
