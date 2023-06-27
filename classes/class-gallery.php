@@ -24,7 +24,7 @@ class Mai_Gallery {
 	/**
 	 * Mai_Gallery constructor.
 	 *
-	 * @since TBD
+	 * @since 1.0.0
 	 *
 	 * @param array $args Gallery args.
 	 *
@@ -79,7 +79,7 @@ class Mai_Gallery {
 	/**
 	 * Displays gallery.
 	 *
-	 * @since TBD
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -90,7 +90,7 @@ class Mai_Gallery {
 	/**
 	 * Gets gallery.
 	 *
-	 * @since TBD
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
@@ -101,9 +101,6 @@ class Mai_Gallery {
 
 		$has_images = ! $this->args['links'] && $this->args['images'];
 		$has_links  = $this->args['links'] && $this->args['images_links'];
-		// $images     = $this->args['links'] ? $this->args['images_links'] : $this->args['images'];
-
-		ray( $this->args['links'], $this->args['images_links'] );
 
 		if ( ! ( $has_images || $has_links ) ) {
 			if ( $this->args['preview'] ) {
@@ -250,13 +247,22 @@ class Mai_Gallery {
 		return $html;
 	}
 
+	/**
+	 * Sanitize image links.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param array $links
+	 *
+	 * @return array
+	 */
 	function sanitize_links( $links ) {
 		if ( ! $links ) {
 			return $links;
 		}
 
 		foreach ( $links as $index => $data ) {
-			if ( ! isset( $data['image'] ) || empty( $data['image'] ) ) {
+			if ( ! isset( $data['image'] ) || ! isset( $data['url'] ) || empty( $data['image'] ) ) {
 				unset( $links[ $index ] );
 			}
 		}
@@ -267,7 +273,7 @@ class Mai_Gallery {
 	/**
 	 * Gets the image size.
 	 *
-	 * @since TBD
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
