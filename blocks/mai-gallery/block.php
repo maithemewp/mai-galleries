@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || die;
 
 add_action( 'acf/init', 'mai_register_gallery_block' );
 /**
- * Register Mai Popup block.
+ * Register block.
  *
  * @since 0.1.0
  *
@@ -16,7 +16,7 @@ function mai_register_gallery_block() {
 }
 
 /**
- * Callback function to render the Gallery block.
+ * Callback function to render the block.
  *
  * @since 0.1.0
  *

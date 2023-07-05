@@ -95,10 +95,12 @@ class Mai_Gallery {
 	 * @return string
 	 */
 	function get() {
-		static $count = 1;
-		$html         = '';
-		$images       = [];
+		static $count    = 1;
+		static $styles   = false;
+		static $lightbox = false;
 
+		$html       = '';
+		$images     = [];
 		$has_images = ! $this->args['links'] && $this->args['images'];
 		$has_links  = $this->args['links'] && $this->args['images_links'];
 
@@ -111,9 +113,20 @@ class Mai_Gallery {
 			return $html;
 		}
 
-		if ( ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
-			$this->enqueue_lightbox_styles();
+		// Maybe add inline styles.
+		if ( ! $styles && ! $this->args['preview'] ) {
+			$styles = true;
+			$path   = MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries%s.css', $this->get_suffix() );
+			$css    = file_get_contents( $path );
+
+			wp_add_inline_style( 'wp-block-library', trim( $css ) );
+		}
+
+		// Maybe enqueue lightbox scripts styles. Too much CSS and no need to load inline since it won't be used until launched.
+		if ( ! $lightbox && ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
+			$lightbox = true;
 			$this->enqueue_lightbox_scripts();
+			$this->enqueue_lightbox_styles();
 		}
 
 		// Build array to match repeater, for easier loop later.
@@ -166,8 +179,6 @@ class Mai_Gallery {
 				],
 			]
 		);
-
-			$html .= $this->get_css();
 
 			foreach ( $images as $data ) {
 				$image_id = $data['image'];
@@ -323,35 +334,6 @@ class Mai_Gallery {
 			[],
 			MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries-lightbox%s.css', $this->get_suffix() ) ) )
 		);
-	}
-
-	/**
-	 * Gets css if it hasn't been loaded yet.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @return string
-	 */
-	public function get_css() {
-		$css = '';
-
-		if ( $this->args['preview'] ) {
-			return $css;
-		}
-
-		static $loaded = false;
-
-		if ( $loaded ) {
-			return $css;
-		}
-
-
-		if ( ! is_admin() && did_action( 'wp_print_styles' ) ) {
-			$css    = file_get_contents( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries%s.css', $this->get_suffix() ) );
-			$loaded = true;
-		}
-
-		return sprintf( '<style>%s</style>', $css );
 	}
 
 	/**
