@@ -86,7 +86,7 @@ function mai_gallery_load_columns( $field ) {
 	return $field;
 }
 
-add_action( 'acf/init', 'mai_gallery_register_field_group', 10, 3 );
+add_action( 'acf/init', 'mai_gallery_register_field_group' );
 /**
  * Registers field groups.
  *

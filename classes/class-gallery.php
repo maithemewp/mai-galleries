@@ -95,9 +95,7 @@ class Mai_Gallery {
 	 * @return string
 	 */
 	function get() {
-		static $count    = 1;
-		static $styles   = false;
-		static $lightbox = false;
+		static $count = 1;
 
 		$html       = '';
 		$images     = [];
@@ -113,17 +111,15 @@ class Mai_Gallery {
 			return $html;
 		}
 
-		// Maybe add inline styles.
-		if ( ! $styles && ! $this->args['preview'] ) {
-			$styles = true;
-			$path   = MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries%s.css', $this->get_suffix() );
-			$css    = file_get_contents( $path );
-
-			wp_add_inline_style( 'wp-block-library', trim( $css ) );
-		}
+		// Add inline CSS.
+		$suffix = $this->get_suffix();
+		$url    = MAI_GALLERIES_PLUGIN_URL . "assets/css/mai-galleries{$suffix}.css";
+		$path   = MAI_GALLERIES_PLUGIN_DIR . "assets/css/mai-galleries{$suffix}.css";
+		wp_enqueue_style( 'mai-galleries', $url );
+		wp_style_add_data( 'mai-galleries', 'path', $path );
 
 		// Maybe enqueue lightbox scripts styles. Too much CSS and no need to load inline since it won't be used until launched.
-		if ( ! $lightbox && ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
+		if ( ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
 			$lightbox = true;
 			$this->enqueue_lightbox_scripts();
 			$this->enqueue_lightbox_styles();
