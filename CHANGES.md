@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 (7/10/23)
+* Added: New block setting to enable linked images in your gallery.
+* Changed: Better handling of inline styles via `wp_add_inline_style()`.
+* Changed: Updated the updater.
+
 ## 1.1.1 (1/11/23)
 * Fixed: Better support for SVG logos.
 

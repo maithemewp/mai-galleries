@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || die;
 
 add_action( 'acf/init', 'mai_register_gallery_block' );
 /**
- * Register Mai Popup block.
+ * Register block.
  *
  * @since 0.1.0
  *
@@ -16,7 +16,7 @@ function mai_register_gallery_block() {
 }
 
 /**
- * Callback function to render the Gallery block.
+ * Callback function to render the block.
  *
  * @since 0.1.0
  *
@@ -32,7 +32,9 @@ function mai_do_gallery_block( $block, $content = '', $is_preview = false, $post
 		'preview'                => $is_preview,
 		'align'                  => isset( $block['align'] ) ? $block['align'] : '',
 		'class'                  => isset( $block['className'] ) && ! empty( $block['className'] ) ? mai_add_classes( $block['className'] ) : '',
+		'links'                  => get_field( 'links' ),
 		'images'                 => get_field( 'images' ),
+		'images_links'           => get_field( 'images_links' ),
 		'image_orientation'      => get_field( 'image_orientation' ),
 		'image_size'             => get_field( 'image_size' ),
 		'shadow'                 => get_field( 'shadow' ),
@@ -84,7 +86,7 @@ function mai_gallery_load_columns( $field ) {
 	return $field;
 }
 
-add_action( 'acf/init', 'mai_gallery_register_field_group', 10, 3 );
+add_action( 'acf/init', 'mai_gallery_register_field_group' );
 /**
  * Registers field groups.
  *
@@ -133,6 +135,32 @@ function mai_gallery_register_field_group() {
 					],
 				],
 				[
+					'key'     => 'mai_gallery_links',
+					'name'    => 'links',
+					'type'    => 'true_false',
+					'message' => __( 'Enable image links', 'textdomainhere'),
+				],
+				[
+					'key'     => 'mai_gallery_shadow',
+					'name'    => 'shadow',
+					'message' => esc_html__( 'Add image shadow', 'mai-galleries' ),
+					'type'    => 'true_false',
+				],
+				[
+					'key'          => 'mai_gallery_lightbox',
+					'name'         => 'lightbox',
+					'instructions' => esc_html__( 'Loads a larger image in an overlay when clicking on a thumbnail.', 'mai-galleries' ),
+					'message'      => esc_html__( 'Enable image lightbox', 'mai-galleries' ),
+					'type'         => 'true_false',
+					'conditions'   => [
+						[
+							'field'    => 'mai_gallery_links',
+							'operator' => '!=',
+							'value'    => '1',
+						],
+					],
+				],
+				[
 					'key'           => 'mai_gallery_images',
 					'label'         => __( 'Images', 'mai-galleries'),
 					'name'          => 'images',
@@ -142,21 +170,48 @@ function mai_gallery_register_field_group() {
 					'insert'        => 'append',
 					'library'       => 'all',
 					'min'           => 1,
+					'conditions'    => [
+						[
+							'field'    => 'mai_gallery_links',
+							'operator' => '!=',
+							'value'    => '1',
+						],
+					],
 				],
 				[
-					'key'     => 'mai_gallery_shadow',
-					'name'    => 'shadow',
-					'label'   => '',
-					'message' => esc_html__( 'Add image shadow', 'mai-galleries' ),
-					'type'    => 'true_false',
-				],
-				[
-					'key'          => 'mai_gallery_lightbox',
-					'name'         => 'lightbox',
-					'instructions' => esc_html__( 'Loads a larger image in an overlay when clicking on a thumbnail.', 'mai-galleries' ),
-					'label'        => '',
-					'message'      => esc_html__( 'Enable image lightbox', 'mai-galleries' ),
-					'type'         => 'true_false',
+					'key'          => 'mai_gallery_images_links',
+					'label'        => __( 'Images', 'mai-galleries' ),
+					'instructions' => esc_html__( 'Click "Add Image" to add one or more images simultaneously.', 'mai-galleries' ),
+					'name'         => 'images_links',
+					'type'         => 'repeater',
+					'layout'       => 'block',
+					'min'          => 1,
+					'collapsed'    => 'mai_gallery_image',
+					'button_label' => __( 'Add More', 'mai-galleries' ),
+					'sub_fields'   => [
+						[
+							'key'             => 'mai_gallery_image',
+							'name'            => 'image',
+							'type'            => 'image',
+							'return_format'   => 'id',
+							'preview_size'    => 'thumbnail',
+							'parent_repeater' => 'mai_gallery_images_links',
+						],
+						[
+							'key'             => 'mai_gallery_url',
+							'label'           => __( 'URL', 'mai-galleries' ),
+							'name'            => 'url',
+							'type'            => 'url',
+							'parent_repeater' => 'mai_gallery_images_links',
+						],
+					],
+					'conditions' => [
+						[
+							'field'    => 'mai_gallery_links',
+							'operator' => '==',
+							'value'    => '1',
+						],
+					],
 				],
 				[
 					'key'   => 'mai_gallery_layout_tab',__(  'mai-galleries' ),

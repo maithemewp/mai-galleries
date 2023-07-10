@@ -36,3 +36,7 @@
 .mai-gallery-image-caption {
 	margin-top: var(--spacing-xxs);
 }
+
+.editor-styles-wrapper .mai-gallery a {
+	pointer-events: none;
+}

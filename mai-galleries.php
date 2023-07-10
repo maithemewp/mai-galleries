@@ -3,8 +3,8 @@
 /**
  * Plugin Name:     Mai Galleries
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
- * Description:     Responsive image galleries with optional image lightbox.
- * Version:         1.1.1
+ * Description:     Responsive image galleries with optional image links and lightbox.
+ * Version:         1.2.0
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -12,6 +12,9 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+// Must be at the top of the file.
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 /**
  * Main Mai_Galleries_Plugin Class.
@@ -89,7 +92,7 @@ final class Mai_Galleries_Plugin {
 
 		// Plugin version.
 		if ( ! defined( 'MAI_GALLERIES_VERSION' ) ) {
-			define( 'MAI_GALLERIES_VERSION', '1.1.1' );
+			define( 'MAI_GALLERIES_VERSION', '1.2.0' );
 		}
 
 		// Plugin Folder Path.
@@ -146,7 +149,7 @@ final class Mai_Galleries_Plugin {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'plugins_loaded',    [ $this, 'updater' ] );
+		add_action( 'plugins_loaded',    [ $this, 'updater' ], 12 );
 		add_action( 'after_setup_theme', [ $this, 'run' ] ); // Plugins loaded is too early to check for engine version.
 	}
 
@@ -162,18 +165,13 @@ final class Mai_Galleries_Plugin {
 	 * @return void
 	 */
 	public function updater() {
-		// Bail if current user cannot manage plugins.
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			return;
-		}
-
 		// Bail if plugin updater is not loaded.
-		if ( ! class_exists( 'Puc_v4_Factory' ) ) {
+		if ( ! class_exists( 'YahnisElsts\PluginUpdateChecker\v5\PucFactory' ) ) {
 			return;
 		}
 
 		// Setup the updater.
-		$updater = Puc_v4_Factory::buildUpdateChecker( 'https://github.com/maithemewp/mai-galleries/', __FILE__, 'mai-galleries' );
+		$updater = PucFactory::buildUpdateChecker( 'https://github.com/maithemewp/mai-galleries/', __FILE__, 'mai-galleries' );
 
 		// Maybe set github api token.
 		if ( defined( 'MAI_GITHUB_API_TOKEN' ) ) {
