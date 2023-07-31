@@ -120,7 +120,6 @@ class Mai_Gallery {
 
 		// Maybe enqueue lightbox scripts styles. Too much CSS and no need to load inline since it won't be used until launched.
 		if ( ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
-			$lightbox = true;
 			$this->enqueue_lightbox_scripts();
 			$this->enqueue_lightbox_styles();
 		}
@@ -308,7 +307,7 @@ class Mai_Gallery {
 	 */
 	function enqueue_lightbox_scripts() {
 		wp_enqueue_script(
-			'mai-galleries',
+			'mai-galleries-lightbox',
 			MAI_GALLERIES_PLUGIN_URL . sprintf( 'assets/js/mai-galleries-lightbox%s.js', $this->get_suffix() ),
 			[],
 			MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/js/mai-galleries-lightbox%s.js', $this->get_suffix() ) ) ),
@@ -325,7 +324,7 @@ class Mai_Gallery {
 	 */
 	function enqueue_lightbox_styles() {
 		wp_enqueue_style(
-			'mai-galleries',
+			'mai-galleries-lightbox',
 			MAI_GALLERIES_PLUGIN_URL . sprintf( 'assets/css/mai-galleries-lightbox%s.css', $this->get_suffix() ),
 			[],
 			MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( MAI_GALLERIES_PLUGIN_DIR . sprintf( 'assets/css/mai-galleries-lightbox%s.css', $this->get_suffix() ) ) )
