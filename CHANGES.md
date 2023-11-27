@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.2 (11/27/23)
+Changed: Updated the updater.
+
 ## 1.2.1 (7/31/23)
 * Fixed: Lightbox not launching overlay.
 
