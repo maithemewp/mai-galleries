@@ -4,7 +4,7 @@
  * Plugin Name:     Mai Galleries
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
  * Description:     Responsive image galleries with optional image links and lightbox.
- * Version:         1.2.2
+ * Version:         1.2.3
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
@@ -91,7 +91,7 @@ final class Mai_Galleries_Plugin {
 	private function setup_constants() {
 		// Plugin version.
 		if ( ! defined( 'MAI_GALLERIES_VERSION' ) ) {
-			define( 'MAI_GALLERIES_VERSION', '1.2.2' );
+			define( 'MAI_GALLERIES_VERSION', '1.2.3' );
 		}
 
 		// Plugin Folder Path.
