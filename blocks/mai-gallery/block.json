@@ -9,7 +9,8 @@
 	"editorStyle": "file:../../assets/css/mai-galleries.min.css",
 	"acf": {
 		"mode": "preview",
-		"renderCallback": "mai_do_gallery_block"
+		"renderCallback": "mai_do_gallery_block",
+		"validate": false
 	},
 	"supports": {
 		"align": [ "wide", "full" ]
