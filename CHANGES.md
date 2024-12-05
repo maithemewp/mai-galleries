@@ -1,7 +1,12 @@
 # Changelog
 
+## 1.2.3 (12/5/25)
+* Changed: Updated the updater.
+* Changed: Disable unnecessary block validation via ACF.
+* Changed: [Performance] Only run ACF filters in the back end.
+
 ## 1.2.2 (11/27/23)
-Changed: Updated the updater.
+* Changed: Updated the updater.
 
 ## 1.2.1 (7/31/23)
 * Fixed: Lightbox not launching overlay.

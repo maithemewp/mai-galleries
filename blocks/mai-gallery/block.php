@@ -66,6 +66,10 @@ add_filter( 'acf/load_field/key=mai_gallery_columns_clone', 'mai_gallery_load_co
  * @return array
  */
 function mai_gallery_load_columns( $field ) {
+	if ( ! is_admin() ) {
+		return $field;
+	}
+
 	if ( ! ( isset( $field['sub_fields'] ) && $field['sub_fields'] ) ) {
 		return $fields;
 	}
