@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.4 (5/27/26)
+* Changed: Updated blocks to Block API v3 for WP 6.9 compatibility.
+
 ## 1.2.3 (12/5/24)
 * Changed: Updated the updater.
 * Changed: Disable unnecessary block validation via ACF.
