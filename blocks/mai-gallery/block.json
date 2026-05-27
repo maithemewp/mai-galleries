@@ -1,4 +1,5 @@
 {
+	"apiVersion": 3,
 	"name": "acf/mai-gallery",
 	"title": "Mai Gallery",
 	"description": "A responsive image gallery with optional image lightbox.",
