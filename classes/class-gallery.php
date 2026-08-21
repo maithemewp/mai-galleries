@@ -31,31 +31,46 @@ class Mai_Gallery {
 	 * @return void
 	 */
 	function __construct( $args ) {
-		$args = wp_parse_args( $args,
-			[
-				'preview'                => false,
-				'align'                  => '',
-				'class'                  => '',
-				'links'                  => false,
-				'images'                 => [],
-				'images_links'           => [],
-				'image_orientation'      => 'landscape',
-				'image_size'             => 'sm',
-				'shadow'                 => false,
-				'lightbox'               => false,
-				'columns'                => 3,
-				'columns_responsive'     => '',
-				'columns_md'             => '',
-				'columns_sm'             => '',
-				'columns_xs'             => '',
-				'align_columns'          => '',
-				'align_columns_vertical' => '',
-				'column_gap'             => 'md',
-				'row_gap'                => 'md',
-				'margin_top'             => '',
-				'margin_bottom'          => '',
-			]
-		);
+		$defaults = [
+			'preview'                => false,
+			'align'                  => '',
+			'class'                  => '',
+			'links'                  => false,
+			'images'                 => [],
+			'images_links'           => [],
+			'image_orientation'      => 'landscape',
+			'image_size'             => 'landscape-md',
+			'shadow'                 => false,
+			'lightbox'               => false,
+			'columns'                => 3,
+			'columns_responsive'     => '',
+			'columns_md'             => '',
+			'columns_sm'             => '',
+			'columns_xs'             => '',
+			'align_columns'          => '',
+			'align_columns_vertical' => '',
+			'column_gap'             => 'md',
+			'row_gap'                => 'md',
+			'margin_top'             => '',
+			'margin_bottom'          => '',
+		];
+
+		$args = wp_parse_args( $args, $defaults );
+
+		// The block passes every key on every render, so a field the editor has not
+		// written yet arrives as an empty string and wp_parse_args() has nothing to
+		// fall back on. Restore the defaults for the keys that must never be empty.
+		//
+		// An empty 'columns' is sanitized to 0 and builds `--columns: 1 / 0`, whose
+		// division by zero invalidates the flex-basis calc and drops every item to
+		// zero width. Its field offers 1-8 and no empty choice, so empty is always
+		// missing data rather than a deliberate setting.
+		//
+		// Deliberately excluded: 'column_gap' and 'row_gap', where empty is the
+		// field's own "None" choice, and the booleans, where '0' is a real value.
+		foreach ( [ 'image_orientation', 'image_size', 'columns' ] as $key ) {
+			$args[ $key ] = $args[ $key ] ?: $defaults[ $key ];
+		}
 
 		// Sanitize.
 		$args['preview']           = mai_sanitize_bool( $args['preview'] );
@@ -140,6 +155,15 @@ class Mai_Gallery {
 			'id'    => 'mai-gallery-' . $count,
 			'class' => 'mai-gallery',
 		];
+
+		// Every item in a gallery is one image at a known size, so a Fit column can be
+		// sized to it. Without this the column takes its width from the image, which either
+		// reports 3000px under WordPress's sizes="auto" or nothing at all before it loads.
+		$fit_basis = mai_get_image_width( $this->image_size );
+
+		if ( $fit_basis ) {
+			$this->args['fit_basis'] = $fit_basis . 'px';
+		}
 
 		$atts = mai_get_columns_atts( $atts, $this->args );
 
