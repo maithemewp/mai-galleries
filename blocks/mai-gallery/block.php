@@ -71,7 +71,7 @@ function mai_gallery_load_columns( $field ) {
 	}
 
 	if ( ! ( isset( $field['sub_fields'] ) && $field['sub_fields'] ) ) {
-		return $fields;
+		return $field;
 	}
 
 	foreach ( $field['sub_fields'] as $index => $sub_field ) {
@@ -115,22 +115,22 @@ function mai_gallery_register_field_group() {
 					'placement' => 'top',
 				],
 				[
-					'key'        => 'mai_gallery_image_orientation',
-					'name'       => 'image_orientation',
-					'label'      => esc_html__( 'Image Orientation', 'mai-galleries' ),
-					'type'       => 'select',
-					'default'    => 'landscape',
-					'choices'    => mai_get_image_orientation_choices(),
+					'key'           => 'mai_gallery_image_orientation',
+					'name'          => 'image_orientation',
+					'label'         => esc_html__( 'Image Orientation', 'mai-galleries' ),
+					'type'          => 'select',
+					'default_value' => 'landscape',
+					'choices'       => mai_get_image_orientation_choices(),
 				],
 				[
-					'key'        => 'mai_gallery_image_size',
-					'name'       => 'image_size',
-					'label'      => esc_html__( 'Image Size', 'mai-galleries' ),
-					'type'       => 'select',
-					'sanitize'   => 'esc_html',
-					'default'    => 'landscape-md',
-					'choices'    => mai_get_image_size_choices(),
-					'conditions' => [
+					'key'           => 'mai_gallery_image_size',
+					'name'          => 'image_size',
+					'label'         => esc_html__( 'Image Size', 'mai-galleries' ),
+					'type'          => 'select',
+					'sanitize'      => 'esc_html',
+					'default_value' => mai_get_default_image_size(),
+					'choices'       => mai_get_image_size_choices(),
+					'conditions'    => [
 						[
 							'field'    => 'mai_gallery_image_orientation',
 							'operator' => '==',
@@ -218,7 +218,7 @@ function mai_gallery_register_field_group() {
 					],
 				],
 				[
-					'key'   => 'mai_gallery_layout_tab',__(  'mai-galleries' ),
+					'key'   => 'mai_gallery_layout_tab',
 					'label' => __( 'Layout', 'mai-galleries' ),
 					'type'  => 'tab',
 				],
