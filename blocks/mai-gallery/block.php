@@ -128,7 +128,7 @@ function mai_gallery_register_field_group() {
 					'label'         => esc_html__( 'Image Size', 'mai-galleries' ),
 					'type'          => 'select',
 					'sanitize'      => 'esc_html',
-					'default_value' => mai_get_default_image_size(),
+					'default_value' => mai_gallery_get_default_image_size(),
 					'choices'       => mai_get_image_size_choices(),
 					'conditions'    => [
 						[

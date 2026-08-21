@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.7 (8/21/26)
+* Fixed: A fatal error on sites running Mai Engine 2.40.1 or earlier. 1.2.6 called a Mai Engine function that only exists in 2.41.0, on every request.
+
 ## 1.2.6 (8/21/26)
 * Fixed: Setting Image Orientation to Custom rendered full-size images, and picking the first size in the Image Size list appeared to do nothing. Neither select had a working default.
 * Fixed: A gallery with no saved Columns value laid every image out at zero width instead of falling back to 3 columns.
