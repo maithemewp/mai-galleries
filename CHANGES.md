@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.6 (TBD)
+## 1.2.6 (8/21/26)
 * Fixed: Setting Image Orientation to Custom rendered full-size images, and picking the first size in the Image Size list appeared to do nothing. Neither select had a working default.
 * Fixed: A gallery with no saved Columns value laid every image out at zero width instead of falling back to 3 columns.
 * Fixed: Columns set to Fit sized each image wrongly, either stretching it across the full row or collapsing it to nothing. Fit columns are now sized to the chosen image size, which also lets the browser pick a smaller file.
