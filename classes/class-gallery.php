@@ -39,7 +39,7 @@ class Mai_Gallery {
 			'images'                 => [],
 			'images_links'           => [],
 			'image_orientation'      => 'landscape',
-			'image_size'             => 'landscape-md',
+			'image_size'             => mai_get_default_image_size(),
 			'shadow'                 => false,
 			'lightbox'               => false,
 			'columns'                => 3,
