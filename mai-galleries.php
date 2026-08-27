@@ -5,6 +5,7 @@
  * Plugin URI:      https://bizbudding.com/mai-design-pack/
  * Description:     Responsive image galleries with optional image links and lightbox.
  * Version:         1.2.7
+ * Requires PHP:    8.1
  *
  * Author:          BizBudding
  * Author URI:      https://bizbudding.com
