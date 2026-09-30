@@ -48,7 +48,7 @@ function mai_gallery_get_default_image_size() {
  * The version changes with the file, so browsers and CDNs fetch the new copy after
  * an update. Without one WordPress uses its own version, which the plugin never changes.
  *
- * @since TBD
+ * @since 1.3.0
  *
  * @return void
  */

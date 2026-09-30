@@ -330,7 +330,7 @@ class Mai_Gallery {
 	/**
 	 * Whether the gallery uses the masonry layout.
 	 *
-	 * @since TBD
+	 * @since 1.3.0
 	 *
 	 * @return bool
 	 */

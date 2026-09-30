@@ -60,7 +60,7 @@ add_filter( 'acf/load_field/key=mai_gallery_columns_clone', 'mai_gallery_load_co
 /**
  * Loads auto/fit option for columns.
  *
- * @since TBD
+ * @since 1.2.0
  *
  * @param array $field The ACF field.
  *
