@@ -126,12 +126,9 @@ class Mai_Gallery {
 			return $html;
 		}
 
-		// Add inline CSS.
-		$suffix = $this->get_suffix();
-		$url    = MAI_GALLERIES_PLUGIN_URL . "assets/css/mai-galleries{$suffix}.css";
-		$path   = MAI_GALLERIES_PLUGIN_DIR . "assets/css/mai-galleries{$suffix}.css";
-		wp_enqueue_style( 'mai-galleries', $url );
-		wp_style_add_data( 'mai-galleries', 'path', $path );
+		// Small enough that WordPress usually inlines it.
+		mai_gallery_register_style();
+		wp_enqueue_style( 'mai-galleries' );
 
 		// Maybe enqueue lightbox scripts styles. Too much CSS and no need to load inline since it won't be used until launched.
 		if ( ! $this->args['preview'] && ! $this->args['links'] && $this->args['lightbox'] ) {
@@ -169,6 +166,10 @@ class Mai_Gallery {
 
 		if ( $this->args['align'] ) {
 			$atts['class'] = mai_add_classes( 'align' . $this->args['align'], $atts['class'] );
+		}
+
+		if ( $this->is_masonry() ) {
+			$atts['class'] = mai_add_classes( 'is-masonry', $atts['class'] );
 		}
 
 		if ( $this->args['class'] ) {
@@ -308,7 +309,11 @@ class Mai_Gallery {
 	 * @return string
 	 */
 	public function get_image_size() {
-		if ( mai_has_image_orientiation( $this->args['image_orientation'] ) ) {
+		// Masonry keeps each image's own shape, so it needs an uncropped size.
+		if ( $this->is_masonry() ) {
+			$image_size = 'large';
+
+		} elseif ( mai_has_image_orientiation( $this->args['image_orientation'] ) ) {
 			$image_size = 'sm';
 			$image_size = sprintf( '%s-%s', $this->args['image_orientation'], $image_size );
 
@@ -320,6 +325,17 @@ class Mai_Gallery {
 		$image_size = apply_filters( 'mai_gallery_image_size', $image_size, $this->args );
 
 		return esc_attr( $image_size );
+	}
+
+	/**
+	 * Whether the gallery uses the masonry layout.
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	public function is_masonry(): bool {
+		return 'masonry' === $this->args['image_orientation'];
 	}
 
 	/**

@@ -19,6 +19,7 @@
 }
 
 .mai-gallery-image-link {
+	display: block; /* Inline boxes don't clip, so the hover zoom would spill out. */
 	overflow: hidden;
 }
 
@@ -35,6 +36,26 @@
 
 .mai-gallery-image-caption {
 	margin-top: var(--spacing-xxs);
+}
+
+/* Masonry. The extra parentheses matter: --columns is a fraction like `1 / 3`.
+ * display: block covers mai-engine versions without --columns-display. */
+.is-masonry {
+	--columns-display: block;
+	display: block;
+	column-count: calc(1 / (var(--columns)));
+	column-gap: var(--column-gap);
+}
+
+.is-masonry > .mai-gallery-item {
+	display: block;
+	break-inside: avoid;
+	margin: 0 0 var(--row-gap);
+}
+
+/* Fill the column. With sizes="auto" the chosen file can be narrower than the column. */
+.is-masonry .mai-gallery-image {
+	width: 100%;
 }
 
 .editor-styles-wrapper .mai-gallery a {

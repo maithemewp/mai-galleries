@@ -12,6 +12,7 @@ add_action( 'acf/init', 'mai_register_gallery_block' );
  * @return void
  */
 function mai_register_gallery_block() {
+	mai_gallery_register_style();
 	register_block_type( __DIR__ . '/block.json' );
 }
 
@@ -120,7 +121,7 @@ function mai_gallery_register_field_group() {
 					'label'         => esc_html__( 'Image Orientation', 'mai-galleries' ),
 					'type'          => 'select',
 					'default_value' => 'landscape',
-					'choices'       => mai_get_image_orientation_choices(),
+					'choices'       => (array) mai_get_image_orientation_choices() + [ 'masonry' => esc_html__( 'Masonry', 'mai-galleries' ) ],
 				],
 				[
 					'key'           => 'mai_gallery_image_size',
