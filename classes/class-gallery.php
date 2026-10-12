@@ -330,12 +330,14 @@ class Mai_Gallery {
 	/**
 	 * Whether the gallery uses the masonry layout.
 	 *
+	 * Only with a Mai Engine that has masonry, since the choice and its CSS come from there.
+	 *
 	 * @since 1.3.0
 	 *
 	 * @return bool
 	 */
 	public function is_masonry(): bool {
-		return 'masonry' === $this->args['image_orientation'];
+		return 'masonry' === $this->args['image_orientation'] && mai_gallery_has_masonry();
 	}
 
 	/**

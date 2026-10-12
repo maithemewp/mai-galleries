@@ -121,7 +121,7 @@ function mai_gallery_register_field_group() {
 					'label'         => esc_html__( 'Image Orientation', 'mai-galleries' ),
 					'type'          => 'select',
 					'default_value' => 'landscape',
-					'choices'       => (array) mai_get_image_orientation_choices() + [ 'masonry' => esc_html__( 'Masonry', 'mai-galleries' ) ],
+					'choices'       => mai_get_image_orientation_choices(),
 				],
 				[
 					'key'           => 'mai_gallery_image_size',

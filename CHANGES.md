@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.3.0 (TBD)
-* Added: A Masonry choice under Image Orientation. Images keep their own shape and stack into columns without gaps. It is plain CSS, so there is no layout shift and no extra JavaScript. Masonry always uses the Large image size, and Columns set to Fit do not work with it. The editor needs Mai Engine 2.41.0 to show the layout. The front end works with older versions.
+* Added: A Masonry choice under Image Orientation, with Mai Engine 2.41.0 or later. Images keep their own shape and stack into columns without gaps. It is plain CSS, so there is no layout shift and no extra JavaScript. Masonry always uses the Large image size, and Columns set to Fit do not work with it. The choice and its styles come from Mai Engine, which also offers Masonry for grids and archives. With an older Mai Engine the choice is not shown.
 * Fixed: The gallery stylesheet is now versioned, so browsers and CDNs load the new copy after an update instead of a cached old one.
 
 ## 1.2.7 (8/21/26)

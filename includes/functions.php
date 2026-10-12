@@ -43,6 +43,20 @@ function mai_gallery_get_default_image_size() {
 }
 
 /**
+ * Whether Mai Engine has the Masonry image orientation and its CSS.
+ *
+ * Mai Engine 2.41.0 added both, along with mai_get_single_image_orientation_choices(),
+ * which this checks for. A version number can't tell a 2.41.0 beta with masonry from one without.
+ *
+ * @since 1.3.0
+ *
+ * @return bool
+ */
+function mai_gallery_has_masonry(): bool {
+	return function_exists( 'mai_get_single_image_orientation_choices' );
+}
+
+/**
  * Registers the gallery stylesheet, shared by the front end and the block editor.
  *
  * The version changes with the file, so browsers and CDNs fetch the new copy after
