@@ -162,14 +162,11 @@ class Mai_Gallery {
 			$this->args['fit_basis'] = $fit_basis . 'px';
 		}
 
+		// Adds has-columns, and is-masonry when Masonry is picked.
 		$atts = mai_get_columns_atts( $atts, $this->args );
 
 		if ( $this->args['align'] ) {
 			$atts['class'] = mai_add_classes( 'align' . $this->args['align'], $atts['class'] );
-		}
-
-		if ( $this->is_masonry() ) {
-			$atts['class'] = mai_add_classes( 'is-masonry', $atts['class'] );
 		}
 
 		if ( $this->args['class'] ) {
@@ -330,14 +327,15 @@ class Mai_Gallery {
 	/**
 	 * Whether the gallery uses the masonry layout.
 	 *
-	 * Only with a Mai Engine that has masonry, since the choice and its CSS come from there.
+	 * Mai Engine 2.41.0 decides, and adds the is-masonry class and its CSS. Older versions
+	 * don't have masonry, so a saved Masonry gallery shows as a normal grid there.
 	 *
 	 * @since 1.3.0
 	 *
 	 * @return bool
 	 */
 	public function is_masonry(): bool {
-		return 'masonry' === $this->args['image_orientation'] && mai_gallery_has_masonry();
+		return function_exists( 'mai_is_masonry' ) && mai_is_masonry( $this->args );
 	}
 
 	/**
