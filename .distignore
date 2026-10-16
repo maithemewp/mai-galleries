@@ -19,3 +19,7 @@
 /.editorconfig
 /.github/
 /.githooks/
+/docs/
+/.agents/
+/STATE.md
+/TODO.md
