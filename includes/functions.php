@@ -41,3 +41,26 @@ function mai_gallery_get_default_image_size() {
 
 	return 'landscape-md';
 }
+
+/**
+ * Registers the gallery stylesheet, shared by the front end and the block editor.
+ *
+ * The version changes with the file, so browsers and CDNs fetch the new copy after
+ * an update. Without one WordPress uses its own version, which the plugin never changes.
+ *
+ * @since 1.3.0
+ *
+ * @return void
+ */
+function mai_gallery_register_style() {
+	if ( wp_style_is( 'mai-galleries', 'registered' ) ) {
+		return;
+	}
+
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	$file   = "assets/css/mai-galleries{$suffix}.css";
+	$path   = MAI_GALLERIES_PLUGIN_DIR . $file;
+
+	wp_register_style( 'mai-galleries', MAI_GALLERIES_PLUGIN_URL . $file, [], MAI_GALLERIES_VERSION . '.' . date( 'njYHi', filemtime( $path ) ) );
+	wp_style_add_data( 'mai-galleries', 'path', $path );
+}

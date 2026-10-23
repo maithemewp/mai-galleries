@@ -6,7 +6,7 @@
 	"keywords": [ "gallery", "slideshow" ],
 	"icon": "format-gallery",
 	"textdomain": "mai-gallery",
-	"editorStyle": "file:../../assets/css/mai-galleries.min.css",
+	"editorStyle": "mai-galleries",
 	"acf": {
 		"blockVersion": 3,
 		"renderCallback": "mai_do_gallery_block",

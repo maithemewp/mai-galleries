@@ -16,3 +16,5 @@
 
 # deployable-guard's generated pre-commit hook (dev-only; regenerated on install).
 .githooks/
+
+mai-sites.json

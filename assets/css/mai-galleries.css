@@ -19,6 +19,7 @@
 }
 
 .mai-gallery-image-link {
+	display: block; /* Inline boxes don't clip, so the hover zoom would spill out. */
 	overflow: hidden;
 }
 
@@ -36,6 +37,8 @@
 .mai-gallery-image-caption {
 	margin-top: var(--spacing-xxs);
 }
+
+/* Masonry's styles come from Mai Engine (.has-columns.is-masonry). */
 
 .editor-styles-wrapper .mai-gallery a {
 	pointer-events: none;
