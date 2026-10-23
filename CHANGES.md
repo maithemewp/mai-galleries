@@ -1,8 +1,10 @@
 # Changelog
 
-## 1.3.0 (TBD)
-* Added: A Masonry choice under Image Orientation, with Mai Engine 2.41.0 or later. Images keep their own shape and stack into columns without gaps. It is plain CSS, so there is no layout shift and no extra JavaScript. Masonry always uses the Large image size, and Columns set to Fit do not work with it. The choice and its styles come from Mai Engine, which also offers Masonry for grids and archives. With an older Mai Engine the choice is not shown.
-* Fixed: The gallery stylesheet is now versioned, so browsers and CDNs load the new copy after an update instead of a cached old one.
+## 1.3.0 (10/23/26)
+* Added: Masonry image orientation, with Mai Engine 2.41.0 or later. Images keep their own shape and stack into columns, using the Large image size.
+* Changed: Declare Requires PHP 8.1, the same as Mai Engine.
+* Fixed: Browsers and CDNs now load the new gallery stylesheet after an update instead of a cached old one.
+* Fixed: A fatal error in WP-CLI commands run with `--skip-themes`.
 
 ## 1.2.7 (8/21/26)
 * Fixed: A fatal error on sites running Mai Engine 2.40.1 or earlier. 1.2.6 called a Mai Engine function that only exists in 2.41.0, on every request.
