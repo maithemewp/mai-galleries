@@ -207,6 +207,11 @@ final class Mai_Galleries_Plugin {
 			return;
 		}
 
+		// Bail if Mai Engine skipped loading its functions, as it does without Genesis (WP-CLI with --skip-themes).
+		if ( ! function_exists( 'mai_get_image_orientation_choices' ) ) {
+			return;
+		}
+
 		// Blocks.
 		include MAI_GALLERIES_PLUGIN_DIR . 'blocks/mai-gallery/block.php';
 	}
